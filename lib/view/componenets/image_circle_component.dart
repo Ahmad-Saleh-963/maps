@@ -10,10 +10,15 @@ class ImageCircleComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipOval(
-      child: Image.asset(
-        placeholder,
-        fit: BoxFit.cover,
+    return Container(
+      width: 50,
+      height: 50,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        image: DecorationImage(
+          image: AssetImage(placeholder),
+          fit: BoxFit.contain,
+        ),
       ),
     );
   }

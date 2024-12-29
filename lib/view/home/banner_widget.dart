@@ -6,16 +6,15 @@ class BannerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: ColorsApp.yalow,
-        border: Border.all(color: ColorsApp.border, width: 2),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
+    return Stack(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: ColorsApp.yalow,
+            border: Border.all(color: ColorsApp.border, width: 2),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),
+          child: Row(
             children: [
               Image.asset("assets/images/winner.png", width: 40),
               const SizedBox(width: 12),
@@ -27,39 +26,54 @@ class BannerWidget extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: Colors.blue[900],
+                      color: ColorsApp.buttons,
+                      shadows: const [
+                        Shadow(
+                          color: Colors.white,
+                          offset: Offset(0, 1),
+                        )
+                      ],
                     ),
                   ),
                   const SizedBox(height: 4),
-                  const Text(
+                    Text(
                     "No fuss, no ads, for only 5 TL a year",
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.black87,
+                      color: ColorsApp.buttons,
+                      shadows:  [
+                        Shadow(
+                          color: Colors.white,
+                          offset: Offset(0, 1),
+                        )
+                      ],
                     ),
                   ),
                 ],
               ),
             ],
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-            // حشوة النص في المربع
-            decoration: BoxDecoration(
-              color: Colors.teal, // لون الخلفية
-              borderRadius: BorderRadius.circular(8), // زوايا مستديرة
-            ),
-            child: const Text(
-              "TL 5", // النص داخل المربع
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+        ),
+        Positioned(
+            right: 20,
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              height: 75,
+              color: ColorsApp.primaryColor,
+              child: const Center(
+                child: Text(
+                  "TL 5",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
               ),
             ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

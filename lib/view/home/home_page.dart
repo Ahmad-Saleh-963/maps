@@ -44,6 +44,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ColorsApp.primaryColor,
+        toolbarHeight: 100,
         actions: const [
           ImageCircleComponent(),
           SizedBox(width: 16),
@@ -61,6 +62,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
+        elevation: 0.0,
       ),
       body: BlocBuilder<TasksCubit, TasksState>(
         bloc: cubit,
