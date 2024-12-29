@@ -8,6 +8,7 @@ class TasksState with _$TasksState {
   factory TasksState({
     @Default(false) bool loading,
     @Default(false) bool updating,
+    @Default(false) bool hasErorr,
     @Default('') String date,
     String? title,
     String? description,

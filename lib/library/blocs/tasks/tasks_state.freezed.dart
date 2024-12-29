@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$TasksState {
   bool get loading => throw _privateConstructorUsedError;
   bool get updating => throw _privateConstructorUsedError;
+  bool get hasErorr => throw _privateConstructorUsedError;
   String get date => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
@@ -37,6 +38,7 @@ abstract class $TasksStateCopyWith<$Res> {
   $Res call(
       {bool loading,
       bool updating,
+      bool hasErorr,
       String date,
       String? title,
       String? description,
@@ -58,6 +60,7 @@ class _$TasksStateCopyWithImpl<$Res, $Val extends TasksState>
   $Res call({
     Object? loading = null,
     Object? updating = null,
+    Object? hasErorr = null,
     Object? date = null,
     Object? title = freezed,
     Object? description = freezed,
@@ -71,6 +74,10 @@ class _$TasksStateCopyWithImpl<$Res, $Val extends TasksState>
       updating: null == updating
           ? _value.updating
           : updating // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasErorr: null == hasErorr
+          ? _value.hasErorr
+          : hasErorr // ignore: cast_nullable_to_non_nullable
               as bool,
       date: null == date
           ? _value.date
@@ -103,6 +110,7 @@ abstract class _$$TasksStateImplCopyWith<$Res>
   $Res call(
       {bool loading,
       bool updating,
+      bool hasErorr,
       String date,
       String? title,
       String? description,
@@ -122,6 +130,7 @@ class __$$TasksStateImplCopyWithImpl<$Res>
   $Res call({
     Object? loading = null,
     Object? updating = null,
+    Object? hasErorr = null,
     Object? date = null,
     Object? title = freezed,
     Object? description = freezed,
@@ -135,6 +144,10 @@ class __$$TasksStateImplCopyWithImpl<$Res>
       updating: null == updating
           ? _value.updating
           : updating // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasErorr: null == hasErorr
+          ? _value.hasErorr
+          : hasErorr // ignore: cast_nullable_to_non_nullable
               as bool,
       date: null == date
           ? _value.date
@@ -162,6 +175,7 @@ class _$TasksStateImpl implements _TasksState {
   _$TasksStateImpl(
       {this.loading = false,
       this.updating = false,
+      this.hasErorr = false,
       this.date = '',
       this.title,
       this.description,
@@ -174,6 +188,9 @@ class _$TasksStateImpl implements _TasksState {
   @override
   @JsonKey()
   final bool updating;
+  @override
+  @JsonKey()
+  final bool hasErorr;
   @override
   @JsonKey()
   final String date;
@@ -192,7 +209,7 @@ class _$TasksStateImpl implements _TasksState {
 
   @override
   String toString() {
-    return 'TasksState(loading: $loading, updating: $updating, date: $date, title: $title, description: $description, tasks: $tasks)';
+    return 'TasksState(loading: $loading, updating: $updating, hasErorr: $hasErorr, date: $date, title: $title, description: $description, tasks: $tasks)';
   }
 
   @override
@@ -203,6 +220,8 @@ class _$TasksStateImpl implements _TasksState {
             (identical(other.loading, loading) || other.loading == loading) &&
             (identical(other.updating, updating) ||
                 other.updating == updating) &&
+            (identical(other.hasErorr, hasErorr) ||
+                other.hasErorr == hasErorr) &&
             (identical(other.date, date) || other.date == date) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.description, description) ||
@@ -211,8 +230,8 @@ class _$TasksStateImpl implements _TasksState {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, loading, updating, date, title,
-      description, const DeepCollectionEquality().hash(_tasks));
+  int get hashCode => Object.hash(runtimeType, loading, updating, hasErorr,
+      date, title, description, const DeepCollectionEquality().hash(_tasks));
 
   @JsonKey(ignore: true)
   @override
@@ -225,6 +244,7 @@ abstract class _TasksState implements TasksState {
   factory _TasksState(
       {final bool loading,
       final bool updating,
+      final bool hasErorr,
       final String date,
       final String? title,
       final String? description,
@@ -234,6 +254,8 @@ abstract class _TasksState implements TasksState {
   bool get loading;
   @override
   bool get updating;
+  @override
+  bool get hasErorr;
   @override
   String get date;
   @override

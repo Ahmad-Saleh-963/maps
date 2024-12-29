@@ -8,6 +8,7 @@ import 'package:sport/library/utils/static_recoures.dart';
 import 'package:sport/view/componenets/empty_component.dart';
 import 'package:sport/view/componenets/image_circle_component.dart';
 import 'package:sport/view/componenets/loading_component.dart';
+import 'package:sport/view/componenets/text_widget.dart';
 import 'package:sport/view/tasks/add_edit_task.dart';
 import 'package:sport/view/tasks/task_widget.dart';
 
@@ -44,7 +45,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: ColorsApp.primaryColor,
         actions: const [
-          ImageCircleComponent(radius: 20),
+          ImageCircleComponent(),
           SizedBox(width: 16),
         ],
         leadingWidth: double.infinity,
@@ -54,9 +55,9 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("salam, ${StaticResources.name}"),
+              TextWidget(text: "salam, ${StaticResources.name}"),
               SizedBox(height: 6),
-              Text(StaticResources.email),
+              TextWidget(text: StaticResources.email),
             ],
           ),
         ),
@@ -69,7 +70,7 @@ class _HomePageState extends State<HomePage> {
             width: width,
             child: Column(
               children: [
-                 const BannerWidget(),
+                const BannerWidget(),
                 const SizedBox(height: 16),
                 _buildListTasks(state),
               ],
@@ -99,16 +100,25 @@ class _HomePageState extends State<HomePage> {
       return const EmptyComponent(
         title: "لايوجد مهام",
       );
+    } else if (state.hasErorr) {
+      return Expanded(
+        child: GestureDetector(
+          onTap: () {
+            cubit.getTasks();
+          },
+          child: const Center(child: Text("إنقر لإعادة المحاولة")),
+        ),
+      );
     }
     return Expanded(
       child: ListView.builder(
         itemCount: state.tasks.length,
         itemBuilder: (context, index) => TaskWidget(
           task: state.tasks[index],
-          onDelete: (){
+          onDelete: () {
             cubit.deleteTask(state.tasks[index]);
           },
-          onComplete: (){
+          onComplete: () {
             cubit.completeTask(state.tasks[index]);
           },
         ),

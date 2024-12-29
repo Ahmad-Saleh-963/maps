@@ -9,7 +9,6 @@ class BannerWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: ColorsApp.yalow,
-        borderRadius: BorderRadius.circular(8.0),
         border: Border.all(color: ColorsApp.border, width: 2),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 32),

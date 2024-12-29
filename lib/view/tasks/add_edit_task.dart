@@ -5,6 +5,7 @@ import 'package:sport/library/blocs/tasks/tasks_state.dart';
 import 'package:sport/library/data_structure/task/task_model.dart';
 import 'package:sport/library/utils/colors.dart';
 import 'package:sport/view/componenets/text_field_widget.dart';
+import 'package:sport/view/componenets/text_widget.dart';
 
 class AddEditTask extends StatefulWidget {
   const AddEditTask({super.key, this.task});
@@ -32,24 +33,34 @@ class _AddEditTaskState extends State<AddEditTask> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: ColorsApp.primaryColor,
-        title: Text(widget.task == null ? "Add New Task" : "Edit Task ${widget.task?.title}"),
+        title: TextWidget(
+          text:
+              cubit.isAdd ? "Add New Task" : "Edit Task ${widget.task?.title}",
+        ),
         centerTitle: true,
       ),
       body: BlocBuilder<TasksCubit, TasksState>(
         bloc: cubit,
         builder: (context, state) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 24),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
             child: Column(
               children: [
-                _buildInputForm(cubit.title,"Task Name",50,state.title),
-                 const SizedBox(height: 30),
-                _buildInputForm(cubit.description,"Task Description",100,state.description),
+                _buildInputForm(
+                    controller: cubit.title,
+                    txt: "Task Name",
+                    error: state.title,
+                    maxLines: 1),
+                const SizedBox(height: 30),
+                _buildInputForm(
+                  controller: cubit.description,
+                  txt: "Task Description",
+                  error: state.description,
+                  maxLines: 5,
+                ),
                 const Spacer(),
                 _buildButtonSave(state),
                 const SizedBox(height: 30),
@@ -61,51 +72,51 @@ class _AddEditTaskState extends State<AddEditTask> {
     );
   }
 
-  Widget _buildInputForm(TextEditingController controller ,String txt,double height,String? error){
-     return Column(
-       crossAxisAlignment: CrossAxisAlignment.start,
-       children: [
-         Text(txt),
-         const SizedBox(height: 10),
-         TextFieldWidget(
-           controller: controller,
-           height: height,
-           error: error,
-         ),
-       ],
-     );
+  Widget _buildInputForm(
+      {required TextEditingController controller,
+      required String txt,
+      String? error,
+      int maxLines = 1}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(txt),
+        const SizedBox(height: 10),
+        TextFieldWidget(
+          controller: controller,
+          maxLines: maxLines,
+          error: error,
+        ),
+      ],
+    );
   }
 
-  Widget _buildButtonSave(TasksState state){
+  Widget _buildButtonSave(TasksState state) {
     return GestureDetector(
-      onTap: ()async{
+      onTap: () async {
         bool isSaved = await cubit.saveTask();
-        if(isSaved){
+        if (isSaved) {
           Navigator.pop(context);
         }
       },
       child: AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          margin: const EdgeInsets.symmetric(horizontal: 20),
-          height: 50,
-          // width: state.loading ? 50 : double.infinity,
+        duration: const Duration(milliseconds: 200),
+        margin: const EdgeInsets.symmetric(horizontal: 20),
+        height: 50,
+        // width: state.loading ? 50 : double.infinity,
         decoration: BoxDecoration(
-          color: ColorsApp.primaryColor,
-          borderRadius: BorderRadius.circular(6)
-        ),
-        child:   Center(
-          child: state.loading ?
-          const CircularProgressIndicator(color: Colors.white,)
-          :
-          const Text(
-            "Save",
-            style: TextStyle(
-              color: Colors.white
-            ),
-          ),
+            color: ColorsApp.primaryColor,
+            borderRadius: BorderRadius.circular(6)),
+        child: Center(
+          child: state.loading
+              ? const CircularProgressIndicator(
+                  color: Colors.white,
+                )
+              : const TextWidget(
+                  text: "Save",
+                ),
         ),
       ),
     );
   }
-
 }

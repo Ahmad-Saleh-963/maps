@@ -43,7 +43,8 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        useMaterial3: false
+        useMaterial3: false,
+        scaffoldBackgroundColor: ColorsApp.bgScaffold,
       ),
       navigatorKey: SingleInstanceService.navigatorKey,
       builder: BotToastInit(),

@@ -15,7 +15,7 @@ class TextFieldWidget extends StatelessWidget {
     this.textAlign = TextAlign.right,
     this.maxLines,
     this.error,
-    this.fillColor = Colors.transparent,
+    this.fillColor = Colors.white,
     this.showBorder = true,
   });
 
@@ -37,9 +37,9 @@ class TextFieldWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextField(
       keyboardType: keyboardType,
-      textAlign: textAlign ?? TextAlign.right,
+      textAlign: TextAlign.left,
       controller: controller,
-      textDirection: TextDirection.rtl,
+      textDirection: TextDirection.ltr,
       maxLines: maxLines,
       enabled: isEnable,
       style: TextStyle(height: 1, fontSize: fontSize),
@@ -48,7 +48,7 @@ class TextFieldWidget extends StatelessWidget {
         prefixIcon: prefix,
         filled: true,
         labelStyle: TextStyle(
-          color: Colors.black,
+          color: ColorsApp.buttons,
           fontSize: fontSize,
         ),
         hintStyle: const TextStyle(
@@ -61,13 +61,19 @@ class TextFieldWidget extends StatelessWidget {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
           borderSide: showBorder
-              ? BorderSide(color: ColorsApp.primaryColor, width: 1.0)
+              ? const BorderSide(color: Colors.grey, width: 2.0)
+              : BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+          borderSide: showBorder
+              ? const BorderSide(color: Colors.grey, width: 2.0)
               : BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
           borderSide: showBorder
-              ? BorderSide(color: ColorsApp.primaryColor, width: 1.0)
+              ? const BorderSide(color: Colors.grey, width: 2.0)
               : BorderSide.none,
         ),
         errorBorder: OutlineInputBorder(

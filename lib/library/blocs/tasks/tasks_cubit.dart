@@ -27,7 +27,7 @@ class TasksCubit extends Cubit<TasksState> {
   }
 
   Future<void> getTasks() async {
-    emit(state.copyWith(title: null, description: null, loading: state.tasks.isEmpty ? true : false));
+    emit(state.copyWith(title: null, description: null, loading: state.tasks.isEmpty ? true : false , hasErorr :false));
     List<TaskModel> tasks = [];
     try {
       var response = await db.from('maps').select().order('id');
@@ -38,7 +38,7 @@ class TasksCubit extends Cubit<TasksState> {
       }
     } catch (e) {
       ShowToastHelper.show("$e", ToastType.error);
-      emit(state.copyWith(loading: false));
+      emit(state.copyWith(loading: false , hasErorr : true));
     }
     emit(state.copyWith(loading: false, tasks: tasks));
   }
